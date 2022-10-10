@@ -46,7 +46,7 @@ function DrawerAppBar(props) {
   const container = window !== undefined ? () => window().document.body : undefined;
 
   return (
-    <Box sx={{ display: 'flex' }}>
+    <Box sx={{ display: 'flex'  }}>
       <AppBar component="nav">
         <Toolbar>
           <IconButton
@@ -58,41 +58,45 @@ function DrawerAppBar(props) {
           >
             <MenuIcon />
           </IconButton>
-        
-            <Grid container spacing={1}>
-               <Grid item  sm={4} >
-                <Grid container justifyContent={{xs: 'space-evenly', lg: 'space-evenly'}}>
-                    {navItems.slice(0,2).map((item) => (
-                    <Button key={item} sx={{ color: '#fff', alignContent: 'space evenly'}}>
-                      {item}
-                    </Button>
-                    ))}
+          <Box sx={{ width: '100vw',display: { xs: 'none', sm: 'block' } }}>
+            <Grid container spacing={1} sx={{
+              }}>
+                <Grid item  sm={4} >
+                  <Grid container justifyContent={{xs: 'space-evenly', lg: 'space-evenly'}}>
+                      {navItems.slice(0,2).map((item) => (
+                      <Button key={item} sx={{ color: '#fff', alignContent: 'space evenly'}}>
+                        {item}
+                      </Button>
+                      ))}
+                  </Grid>
+                
                 </Grid>
-               
-              </Grid>
-              <Grid 
-                item sm={4}
-              >
-                 <Grid container justifyContent='center' alignItems='center' direction='column'>
-                 <Box
-                  sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block'}}}
+                <Grid 
+                  item sm={4}
                 >
-                  <img src='/Logo.png' alt='Sci-fi Painting Logo'/>
-                </Box>
-                 </Grid>
-              
-              </Grid>
-              <Grid item  sm={4} >
-                <Grid container justifyContent={{xs: 'space-evenly', lg: 'space-evenly'}}>
-                    {navItems.slice(-2).map((item) => (
-                    <Button key={item} sx={{ color: '#fff'} }>
-                      {item}
-                    </Button>
-                    ))}
+                  <Grid container justifyContent='center' alignItems='center' direction='column'>
+                  <Box
+                    sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block'}}}
+                  >
+                    <img src='/Logo.png' alt='Sci-fi Painting Logo'/>
+                  </Box>
+                  </Grid>
+                
                 </Grid>
-               
+                <Grid item  sm={4} >
+                  <Grid container justifyContent={{xs: 'space-evenly', lg: 'space-evenly'}}>
+                      {navItems.slice(-2).map((item) => (
+                      <Button key={item} sx={{ color: '#fff'} }>
+                        {item}
+                      </Button>
+                      ))}
+                  </Grid>
+                
+                </Grid>
               </Grid>
-            </Grid>
+          </Box>
+        
+           
           
         </Toolbar>
       </AppBar>
