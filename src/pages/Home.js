@@ -1,4 +1,4 @@
-import React from "react";
+import {React, useRef} from "react";
 import "../App.css";
 import Box from "@mui/material/Box";
 import { Grid } from "@mui/material";
@@ -18,10 +18,10 @@ const Home = () => {
   const theme = createTheme({
     breakpoints: {
       values: {
-        xxs: 0, // tiny phones
-        xs: 300, // small phones
-        sm: 374, // phones
-        msm: 500, // wider phones
+        xxs: 0, // foldable phone side
+        xs: 300, //  small
+        sm: 374, // standard 
+        msm: 500, // wider
         md: 600, // tablets
         mlg: 768, // small laptop
         lg: 1000, // desktop
@@ -30,7 +30,7 @@ const Home = () => {
         xxl: 1800, // larger screens
         xxxl: 2000,
       },
-    },
+    }
   });
 
   const itemData = [
@@ -47,8 +47,16 @@ const Home = () => {
       title: "beautiful house",
     },
   ];
+  
+  const bottomRef = useRef(null);
+
+  const botScroll = () => {
+    bottomRef.current?.scrollIntoView({behavior: 'smooth'});
+  }
+  
 
   return (
+    //  Landing page image and Mission statement
     <div>
       <div className="App">
         <Grid container>
@@ -65,7 +73,7 @@ const Home = () => {
                 backgroundPosition: "center",
               }}
             >
-              {/* Landing page image and Mission statement */}
+              
               <Grid container>
                 <Grid item xs={12}>
                   <ThemeProvider theme={theme}>
@@ -179,8 +187,9 @@ const Home = () => {
                                 marginBottom: "1em",
                               }}
                               variant="contained"
+                              onClick={botScroll}
                             >
-                              Book Now
+                              Free Estimates
                             </Button>
                           </Box>
                         </Paper>
@@ -191,6 +200,8 @@ const Home = () => {
               </Grid>
             </Paper>
           </Grid>
+
+          {/* Gallery */}
           <Grid
             sx={{
               margin: "10em 0 0 0",
@@ -245,7 +256,11 @@ const Home = () => {
               </Box>
             </Grid>
           </Grid>
-          <Grid item xs={12}>
+
+          {/* Services */}
+          <Grid item xs={12} sx={{
+            margin: '0 0 10rem 0'
+          }}>
             <Grid
               item
               xs={12}
@@ -258,7 +273,7 @@ const Home = () => {
             </Grid>
             <Grid
               container
-              spacing={10}
+              spacing={3}
               align="center"
               justify="center"
               sx={{
@@ -296,11 +311,12 @@ const Home = () => {
                   <p>Texture</p>
                 </Box>
               </Grid>
-            </Grid>
-          </Grid>
 
-          <Grid item xs={12}>
-            Contact
+              <Grid item xs={12} xl>
+                <div ref={bottomRef}></div>
+              </Grid>
+
+            </Grid>
           </Grid>
         </Grid>
       </div>
