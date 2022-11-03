@@ -8,6 +8,12 @@ import Button from "./Button";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+
+const SERVICE_ID = process.env.REACT_APP_SERVICE_ID
+const TEMPLATE_ID = process.env.REACT_APP_TEMPLATE_ID
+const API_KEY = process.env.REACT_APP_API_KEY
+
+
 const INITIAL_FORM_STATE = {
     firstName: "",
     lastName: "",
@@ -27,9 +33,11 @@ const INITIAL_FORM_STATE = {
     message: Yup.string(),
   });
  
+  
 
 export const ContactForm = () => {
 
+    
     const notify = () => toast("Message Sent");
 
     const form = useRef();
@@ -37,10 +45,10 @@ export const ContactForm = () => {
     const sendEmail = (e) => {
       emailjs
         .sendForm(
-          "service_dbyk6kd",
-          "template_5ia0xld",
-          form.current,
-          "9b_dlbhRT6tiHBB7l"
+        SERVICE_ID,
+        TEMPLATE_ID,
+        form.current,
+        API_KEY
         )
         .then(
           (result) => {
@@ -99,7 +107,9 @@ export const ContactForm = () => {
                   </Grid>
 
                   <Grid item xs={12}>
-                    <Button>Submit Form</Button>
+               
+                    <Button >Submit Form</Button>
+                  
                     <ToastContainer />
                   </Grid>
                 </Grid>
