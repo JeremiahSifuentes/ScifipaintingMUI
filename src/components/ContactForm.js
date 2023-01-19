@@ -8,6 +8,7 @@ import Button from '@mui/material/Button';
 // import emailjs from "@emailjs/browser";
 
 
+<<<<<<< HEAD
 // Style success message
 // Clear form on submit
 // Different sizes of text with theme breakpoints
@@ -44,6 +45,33 @@ const ContactForm = () => {
     setIsSubmit(true);
     setFormValues(initialValues)
   }
+=======
+const SERVICE_ID = process.env.REACT_APP_SERVICE_ID
+const TEMPLATE_ID = process.env.REACT_APP_TEMPLATE_ID
+const API_KEY = process.env.REACT_APP_API_KEY
+
+
+const INITIAL_FORM_STATE = {
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    message: "",
+  };
+
+  const FORM_VALIDATION = Yup.object().shape({
+    firstName: Yup.string().required("Required"),
+    lastName: Yup.string().required("Required"),
+    email: Yup.string().email("Invalid email.").required("Required"),
+    phone: Yup.number()
+      .integer()
+      .typeError("Please enter a valid phone number")
+      .required("Required"),
+    message: Yup.string(),
+  });
+ 
+  
+>>>>>>> master
 
   useEffect(() => {
     
@@ -52,6 +80,7 @@ const ContactForm = () => {
     }
   }, [formErrors, formValues, isSubmit]);
 
+<<<<<<< HEAD
   // Validation Conditionals
   const validate = (values) => {
     const errors = {};
@@ -76,6 +105,30 @@ const ContactForm = () => {
     }
     return errors;
   };
+=======
+    
+    const notify = () => toast("Message Sent");
+
+    const form = useRef();
+
+    const sendEmail = (e) => {
+      emailjs
+        .sendForm(
+        SERVICE_ID,
+        TEMPLATE_ID,
+        form.current,
+        API_KEY
+        )
+        .then(
+          (result) => {
+            notify();
+          },
+          (error) => {
+            console.log(error.text);
+          }
+        );
+    };
+>>>>>>> master
 
   return (
     
@@ -87,6 +140,7 @@ const ContactForm = () => {
       <form >
       <Stack spacing={1.5}>
 
+<<<<<<< HEAD
       {Object.keys(formErrors).length === 0 && isSubmit ? (
          <Fade in={isSubmit}><Typography color="White" style={{backgroundColor: 'Green', alignText: 'center'}}>Email Sent!</Typography></Fade>
       ) : (
@@ -106,6 +160,44 @@ const ContactForm = () => {
       </form>
     </Box>
      
+=======
+                  <Grid item xs={6} sx={{marginTop: '200px'}}>
+                    <Textfield name="firstName" label="First Name" />
+                  </Grid>
+
+                  <Grid item xs={6}>
+                    <Textfield name="lastName" label="Last Name" />
+                  </Grid>
+
+                  <Grid item xs={12}>
+                    <Textfield name="email" label="Email" />
+                  </Grid>
+
+                  <Grid item xs={12}>
+                    <Textfield name="phone" label="Phone" />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <Textfield
+                      name="message"
+                      label="Tell us about your project"
+                      multiline={true}
+                      minRows={4}
+                    />
+                  </Grid>
+
+                  <Grid item xs={12}>
+               
+                    <Button >Submit Form</Button>
+                  
+                    <ToastContainer />
+                  </Grid>
+                </Grid>
+              </Form>
+            </Formik>
+          </Container>
+        </Grid>
+      </Grid>
+>>>>>>> master
   );
 };
 
